@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Daftar Seluruh Mahasiswa</h2>
+
+<table>
+    <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>IPK</th>
+        <th>Jurusan</th>
+    </tr>
+
+    {% for m in data %}
+    <tr>
+        <td>{{ m.nim }}</td>
+        <td>{{ m.nama }}</td>
+        <td>{{ m.kelas }}</td>
+        <td>{{ m.ipk }}</td>
+        <td>{{ m.jurusan }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Tambah Data Mahasiswa</h2>
+
+<form method="POST" class="form-box">
+
+    <label>NIM</label>
+    <input type="text" name="nim" required>
+
+    <label>Nama</label>
+    <input type="text" name="nama" required>
+
+    <label>Kelas</label>
+    <input type="text" name="kelas" required>
+
+    <label>IPK</label>
+    <input type="text" name="ipk" required>
+
+    <label>Jurusan</label>
+    <select name="jurusan">
+        {% for j in jurusan_list %}
+        <option>{{ j }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Simpan</button>
+</form>
+
+{% endblock %}

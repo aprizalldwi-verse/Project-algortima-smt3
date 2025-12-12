@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Edit Data Mahasiswa</h2>
+
+<form method="POST" class="form-box">
+
+    <label>NIM (tidak bisa diubah)</label>
+    <input type="text" value="{{ mhs.nim }}" disabled>
+
+    <label>Nama</label>
+    <input type="text" name="nama" value="{{ mhs.nama }}" required>
+
+    <label>Kelas</label>
+    <input type="text" name="kelas" value="{{ mhs.kelas }}" required>
+
+    <label>IPK</label>
+    <input type="text" name="ipk" value="{{ mhs.ipk }}" required>
+
+    <label>Jurusan</label>
+    <select name="jurusan">
+        {% for j in jurusan_list %}
+        <option value="{{ j }}" {% if j == mhs.jurusan %}selected{% endif %}>{{ j }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Update</button>
+</form>
+
+{% endblock %}

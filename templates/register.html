@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Register</h2>
+
+<form method="POST" class="form-box">
+    <label>Username</label>
+    <input type="text" name="username" required>
+
+    <label>Password</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Buat Akun</button>
+</form>
+
+<p>Sudah punya akun? <a href="{{ url_for('login') }}">Login</a></p>
+
+{% endblock %}

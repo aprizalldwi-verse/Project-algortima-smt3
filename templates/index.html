@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Data Mahasiswa</h2>
+
+<form method="GET" class="filter-box">
+    <input type="text" name="q" placeholder="Cari..." value="{{ q }}">
+
+    <select name="jurusan">
+        <option value="">Semua Jurusan</option>
+        {% for j in jurusan_list %}
+        <option value="{{ j }}" {% if jurusan_filter == j %}selected{% endif %}>{{ j }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="method">
+        <option value="linear" {% if method=="linear" %}selected{% endif %}>Linear</option>
+        <option value="sequential" {% if method=="sequential" %}selected{% endif %}>Sequential</option>
+        <option value="binary" {% if method=="binary" %}selected{% endif %}>Binary</option>
+    </select>
+
+    <select name="sort_alg">
+        <option value="">Python Default</option>
+        <option value="bubble" {% if sort_alg=="bubble" %}selected{% endif %}>Bubble Sort</option>
+        <option value="insertion" {% if sort_alg=="insertion" %}selected{% endif %}>Insertion Sort</option>
+        <option value="selection" {% if sort_alg=="selection" %}selected{% endif %}>Selection Sort</option>
+    </select>
+
+    <select name="sort_field">
+        <option value="nim" {% if sort_field=="nim" %}selected{% endif %}>NIM</option>
+        <option value="nama" {% if sort_field=="nama" %}selected{% endif %}>Nama</option>
+        <option value="ipk" {% if sort_field=="ipk" %}selected{% endif %}>IPK</option>
+    </select>
+
+    <select name="order">
+        <option value="asc" {% if order=="asc" %}selected{% endif %}>Ascending</option>
+        <option value="desc" {% if order=="desc" %}selected{% endif %}>Descending</option>
+    </select>
+
+    <button type="submit">Terapkan</button>
+</form>
+
+<table>
+    <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>IPK</th>
+        <th>Jurusan</th>
+        <th>Aksi</th>
+    </tr>
+
+    {% for m in data %}
+    <tr>
+        <td>{{ m.nim }}</td>
+        <td>{{ m.nama }}</td>
+        <td>{{ m.kelas }}</td>
+        <td>{{ m.ipk }}</td>
+        <td>{{ m.jurusan }}</td>
+        <td>
+            <a href="{{ url_for('edit', nim=m.nim) }}">Edit</a> |
+            <a href="{{ url_for('delete', nim=m.nim) }}" onclick="return confirm('Hapus?')">Hapus</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+

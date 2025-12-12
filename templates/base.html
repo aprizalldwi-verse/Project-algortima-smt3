@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title if title else "Aplikasi Mahasiswa" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body id="body">
+
+<nav class="navbar">
+    <div class="left">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('tambah') }}">Tambah</a>
+        <a href="{{ url_for('mahasiswa_page') }}">Data</a>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </div>
+
+    <div class="right">
+        {% if session.get('user') %}
+            <span class="user">👤 {{ session['user'] }}</span>
+            <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+
+            <!-- Toggle Mode -->
+            <div class="theme-toggle">
+                <label class="switch">
+                    <input id="theme-switch" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span id="theme-label">🌞</span>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- MODE GELAP SCRIPT -->
+<script>
+// LOAD tema sebelumnya
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    document.getElementById("theme-switch").checked = true;
+    document.getElementById("theme-label").textContent = "🌙";
+}
+
+// EVENT toggle tema
+document.getElementById("theme-switch").addEventListener("change", function () {
+    if (this.checked) {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        document.getElementById("theme-label").textContent = "🌙";
+    } else {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        document.getElementById("theme-label").textContent = "🌞";
+    }
+});
+</script>
+
+</body>
+</html>

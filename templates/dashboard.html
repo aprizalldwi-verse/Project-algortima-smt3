@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title">Dashboard Statistik Mahasiswa</h2>
+
+<div class="dashboard-grid">
+
+    <!-- Total Mahasiswa -->
+    <div class="card">
+        <h3>Total Mahasiswa</h3>
+        <p class="value">{{ total }}</p>
+    </div>
+
+    <!-- Rata-rata IPK -->
+    <div class="card">
+        <h3>Rata-rata IPK</h3>
+        <p class="value">{{ avg_ipk }}</p>
+    </div>
+
+    <!-- Mahasiswa per Jurusan -->
+    <div class="card wide">
+        <h3>Jumlah Per Jurusan</h3>
+        <ul class="jurusan-list">
+            {% for j, count in per_jurusan.items() %}
+                <li>{{ j }}: <strong>{{ count }}</strong></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+<!-- GRAFIK PIE (Realtime) -->
+<div class="chart-box">
+    <canvas id="jurusanChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+new Chart(ctx, {
+    type: "pie",
+    data: {
+        labels: Object.keys(labelJurusan),
+        datasets: [{
+            data: Object.values(labelJurusan)
+        }]
+    }
+});
+</script>
+
+{% endblock %}
