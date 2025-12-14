@@ -1,18 +1,22 @@
 /* =========================================================
-   GLOBAL STYLE (LIGHT MODE)
+   GLOBAL STYLE
 ========================================================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
     background: #eef1f7;
     color: #2b2b2b;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background .35s ease, color .35s ease;
 }
 
 /* DARK MODE */
 body.dark {
     background: #0f0f0f;
-    color: #e2e2e2;
+    color: #e5e7eb;
 }
 
 /* =========================================================
@@ -22,10 +26,10 @@ body.dark {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 30px;
-    background: linear-gradient(135deg, #5a4cf0, #a13ff0);
+    padding: 18px 34px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
     position: sticky;
     top: 0;
     z-index: 999;
@@ -35,9 +39,9 @@ body.dark {
     color: white;
     font-weight: 500;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 22px;
     opacity: .9;
-    transition: 0.3s ease;
+    transition: .25s ease;
 }
 
 .navbar a:hover {
@@ -45,13 +49,20 @@ body.dark {
     transform: translateY(-2px);
 }
 
+/* NAVBAR — HOME (GLASS MODE) */
+body.home .navbar {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 12px 45px rgba(0,0,0,.35);
+}
+
 /* =========================================================
-   PAGE CONTAINER
+   CONTAINER & PAGE TITLE
 ========================================================= */
 .container {
     width: 92%;
-    margin: 35px auto;
-    animation: fadeIn 0.4s ease;
+    margin: 36px auto;
+    animation: fadeIn .4s ease;
 }
 
 @keyframes fadeIn {
@@ -59,14 +70,11 @@ body.dark {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =========================================================
-   PAGE TITLE
-========================================================= */
 .page-title {
     font-size: 30px;
     font-weight: 800;
-    margin-bottom: 25px;
-    background: linear-gradient(135deg, #5a4cf0, #b243ff);
+    margin-bottom: 26px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
     -webkit-background-clip: text;
     color: transparent;
     letter-spacing: 1px;
@@ -77,27 +85,28 @@ body.dark {
 ========================================================= */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
     gap: 22px;
 }
 
 /* =========================================================
-   PREMIUM CARD
+   CARD (GLOBAL)
 ========================================================= */
 .card {
-    background: white;
-    border-radius: 18px;
-    padding: 28px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    transition: 0.25s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    transition: .3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(8px);
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 35px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 18px 45px rgba(0,0,0,.18);
 }
 
 .card::before {
@@ -107,19 +116,15 @@ body.dark {
     height: 130%;
     top: -80%;
     left: -20%;
-    background: linear-gradient(135deg, #5a4cf0, #c85bff);
-    opacity: 0.06;
+    background: linear-gradient(135deg, #6366f1, #c084fc);
+    opacity: .06;
     transform: rotate(25deg);
 }
 
-/* DARK MODE CARD */
+/* DARK CARD */
 body.dark .card {
     background: #191919;
-    box-shadow: 0 8px 25px rgba(255,255,255,0.05);
-}
-
-body.dark .card::before {
-    opacity: 0.09;
+    box-shadow: 0 10px 30px rgba(255,255,255,.05);
 }
 
 .card h3 {
@@ -131,12 +136,12 @@ body.dark .card::before {
 .value {
     font-size: 2.6rem;
     font-weight: 800;
-    color: #5a4cf0;
-    text-shadow: 0 0px 10px rgba(90, 76, 240, .25);
+    color: #6366f1;
+    text-shadow: 0 0 12px rgba(99,102,241,.35);
 }
 
 body.dark .value {
-    color: #c47bff;
+    color: #c084fc;
 }
 
 /* Wide card */
@@ -145,7 +150,7 @@ body.dark .value {
 }
 
 /* =========================================================
-   LIST PER JURUSAN
+   LIST
 ========================================================= */
 .jurusan-list {
     list-style: none;
@@ -155,7 +160,7 @@ body.dark .value {
 
 .jurusan-list li {
     padding: 8px 0;
-    font-size: 17px;
+    font-size: 16px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -167,193 +172,26 @@ body.dark .jurusan-list li {
    CHART BOX
 ========================================================= */
 .chart-box {
-    background: white;
+    background: #ffffff;
     padding: 28px;
     border-radius: 20px;
     margin-top: 35px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
 body.dark .chart-box {
     background: #181818;
-    box-shadow: 0 8px 25px rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px rgba(255,255,255,.05);
 }
 
 /* =========================================================
-   FORM INPUTS
+   FORM
 ========================================================= */
-form.form-box input,
-form.form-box select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 18px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background: #fff;
-    transition: border 0.2s ease, background 0.2s ease;
-}
-
-body.dark form.form-box input,
-body.dark form.form-box select {
-    background: #101010;
-    border: 1px solid #333;
-    color: #fff;
-}
-
-button {
-    padding: 12px 22px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #5a4cf0, #9d3ef8);
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s ease;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(120, 80, 255, 0.3);
-}
-
-/* =========================================================
-   FLASH MESSAGES
-========================================================= */
-.alert {
-    padding: 14px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    font-weight: 500;
-}
-
-.alert.error { background: #ffb1b1; }
-.alert.info { background: #c8ddff; }
-.alert.success { background: #c8ffc8; }
-
-/* =========================================================
-   TOGGLE SWITCH (DARK MODE)
-========================================================= */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 55px;
-    height: 28px;
-    margin-left: 10px;
-}
-
-.switch input { display: none; }
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    inset: 0;
-    background: #cfcfcf;
-    border-radius: 34px;
-    transition: 0.4s;
-}
-
-.slider:before {
-    content: "";
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    left: 3px;
-    bottom: 3px;
-    background: white;
-    border-radius: 50%;
-    transition: 0.3s ease;
-}
-
-input:checked + .slider {
-    background: linear-gradient(135deg, #5a4cf0, #ab4df5);
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-
-/* =========================================================
-   TABLE STYLE — PREMIUM
-========================================================= */
-
-.table-box {
-    background: white;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    overflow-x: auto;
-    margin-top: 25px;
-}
-
-body.dark .table-box {
-    background: #1a1a1a;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table thead {
-    background: linear-gradient(135deg, #5a4cf0, #a13ff0);
-    color: white;
-}
-
-table thead th {
-    padding: 14px;
-    font-size: 15px;
-    text-align: left;
-}
-
-table tbody tr {
-    background: white;
-    transition: 0.25s ease;
-}
-
-body.dark table tbody tr {
-    background: #181818;
-}
-
-table tbody tr:nth-child(even) {
-    background: #f1f1ff;
-}
-
-body.dark table tbody tr:nth-child(even) {
-    background: #222;
-}
-
-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-}
-
-body.dark table td {
-    border-bottom: 1px solid #333;
-    color: #ddd;
-}
-
-/* Hover effect */
-table tbody tr:hover {
-    background: #e6e1ff;
-    transform: scale(1.01);
-}
-
-body.dark table tbody tr:hover {
-    background: #282238;
-}
-
-
-/* =========================================================
-   FORM TAMBAH MAHASISWA — MODERN
-========================================================= */
-
 .form-box {
-    background: white;
-    padding: 28px;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.06);
     max-width: 550px;
     margin: 25px auto;
 }
@@ -376,7 +214,7 @@ body.dark .form-box {
     margin-bottom: 18px;
     border-radius: 10px;
     border: 1px solid #ccc;
-    transition: 0.3s;
+    transition: .3s ease;
 }
 
 body.dark .form-box input,
@@ -388,13 +226,284 @@ body.dark .form-box select {
 
 .form-box input:focus,
 .form-box select:focus {
-    border-color: #5a4cf0;
-    box-shadow: 0 0 8px rgba(90, 76, 240, 0.4);
+    border-color: #6366f1;
+    box-shadow: 0 0 10px rgba(99,102,241,.4);
 }
 
-button.submit-btn {
+/* =========================================================
+   BUTTON
+========================================================= */
+button,
+.btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1, #7c3aed);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s ease;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(99,102,241,.35);
+}
+
+button:active,
+.btn:active {
+    transform: scale(.97);
+}
+
+/* =========================================================
+   ALERT
+========================================================= */
+.alert {
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.alert.error   { background: #ffb1b1; }
+.alert.info    { background: #c8ddff; }
+.alert.success { background: #c8ffc8; }
+
+/* =========================================================
+   TOGGLE SWITCH
+========================================================= */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 28px;
+    margin-left: 10px;
+}
+
+.switch input { display: none; }
+
+.slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: #cfcfcf;
+    border-radius: 34px;
+    transition: .4s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* =========================================================
+   TABLE — PREMIUM
+========================================================= */
+.table-box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    overflow-x: auto;
+    margin-top: 25px;
+}
+
+body.dark .table-box {
+    background: #1a1a1a;
+}
+
+table {
     width: 100%;
-    font-size: 16px;
+    border-collapse: collapse;
+}
+
+table thead {
+    background: linear-gradient(135deg, #6366f1, #7c3aed);
+    color: white;
+}
+
+table th,
+table td {
+    padding: 14px;
+    font-size: 14px;
+    text-align: left;
+}
+
+table tbody tr {
+    transition: .25s ease;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f1f1ff;
+}
+
+body.dark table tbody tr:nth-child(even) {
+    background: #222;
+}
+
+table tbody tr:hover {
+    background: #e6e1ff;
+    transform: scale(1.01);
+}
+
+body.dark table tbody tr:hover {
+    background: #2a2442;
 }
 
 
+
+/* =========================================================
+   LOGIN PAGE — PURPLE MODERN
+========================================================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.login-hero {
+    text-align: center;
+    color: white;
+}
+
+.login-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.login-hero p {
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+/* Login Card */
+.login-card {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(14px);
+    padding: 35px;
+    border-radius: 20px;
+    width: 360px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+}
+
+.login-card h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: white;
+}
+
+/* Input */
+.login-card input {
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+/* Button */
+.login-card button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    opacity: 0.9;
+}
+
+/* Register link */
+.register-text {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-text a {
+    color: #ffd369;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+/* =========================================================
+   LOGIN PAGE — MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .login-page {
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .login-hero {
+        margin-top: 60px;
+        width: 100%;
+    }
+
+    .login-hero h1 {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+
+    .login-hero p {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .login-card {
+        width: 100%;
+        padding: 28px 22px;
+        border-radius: 18px;
+    }
+
+    .login-card h2 {
+        font-size: 22px;
+    }
+
+    .login-card input {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .login-card button {
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .register-text {
+        font-size: 13px;
+    }
+}

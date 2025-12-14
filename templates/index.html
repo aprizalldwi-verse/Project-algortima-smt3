@@ -3,8 +3,20 @@
 
 <h2>Data Mahasiswa</h2>
 
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<!-- Filter & Search -->
 <form method="GET" class="filter-box">
-    <input type="text" name="q" placeholder="Cari..." value="{{ q }}">
+    <input type="text" name="q" placeholder="Cari..." value="{{ q|default('') }}">
 
     <select name="jurusan">
         <option value="">Semua Jurusan</option>
@@ -37,34 +49,40 @@
         <option value="desc" {% if order=="desc" %}selected{% endif %}>Descending</option>
     </select>
 
-    <button type="submit">Terapkan</button>
+    <button type="submit" class="btn btn-primary">Terapkan</button>
 </form>
 
-<table>
-    <tr>
-        <th>NIM</th>
-        <th>Nama</th>
-        <th>Kelas</th>
-        <th>IPK</th>
-        <th>Jurusan</th>
-        <th>Aksi</th>
-    </tr>
-
+<!-- Tabel Data Mahasiswa -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>IPK</th>
+            <th>Jurusan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for m in data %}
-    <tr>
-        <td>{{ m.nim }}</td>
-        <td>{{ m.nama }}</td>
-        <td>{{ m.kelas }}</td>
-        <td>{{ m.ipk }}</td>
-        <td>{{ m.jurusan }}</td>
-        <td>
-            <a href="{{ url_for('edit', nim=m.nim) }}">Edit</a> |
-            <a href="{{ url_for('delete', nim=m.nim) }}" onclick="return confirm('Hapus?')">Hapus</a>
-        </td>
-    </tr>
+        <tr>
+            <td>{{ m.nim }}</td>
+            <td>{{ m.nama }}</td>
+            <td>{{ m.kelas }}</td>
+            <td>{{ m.ipk }}</td>
+            <td>{{ m.jurusan }}</td>
+            <td>
+                <a href="{{ url_for('edit', nim=m.nim) }}" class="btn btn-edit">Edit</a>
+                <a href="{{ url_for('hapus', nim=m.nim) }}" onclick="return confirm('Hapus data ini?')" class="btn btn-delete">Hapus</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6" style="text-align:center;">Tidak ada data</td>
+        </tr>
     {% endfor %}
+    </tbody>
 </table>
 
 {% endblock %}
-
-

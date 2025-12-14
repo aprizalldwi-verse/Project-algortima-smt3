@@ -1,18 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Login</h2>
+<div class="login-page">
+  <div class="login-hero">
+    <h1>Sistem Manajemen Mahasiswa</h1>
+    <p>Masukkan kredensial Anda untuk memulai petualangan yang luar biasa.</p>
 
-<form method="POST" class="form-box">
-    <label>Username</label>
-    <input type="text" name="username" required>
+    <div class="login-card">
+      <h2>Login</h2>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+      <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
 
-    <button type="submit">Login</button>
-</form>
+        <button type="submit">Masuk</button>
+      </form>
 
-<p>Belum punya akun? <a href="{{ url_for('register') }}">Register</a></p>
+      <p class="register-text">
+        Belum punya akun?
+        <a href="{{ url_for('register') }}">Register</a>
+      </p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

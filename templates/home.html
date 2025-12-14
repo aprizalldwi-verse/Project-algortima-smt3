@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="home-page">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero-final">
+    <div class="hero-left">
+
+      <span class="tag">
+        SIMA-ALG ⭐ • Academic Algorithm System
+      </span>
+
+      <h1>
+        Sistem Manajemen <br>
+        Mahasiswa Berbasis <span>Algoritma</span>
+      </h1>
+
+      <p>
+        <strong>SIMA-ALG ⭐</strong> adalah aplikasi akademik modern
+        untuk mengelola data mahasiswa dengan penerapan algoritma
+        <b>Searching</b>, <b>Sorting</b>, serta
+        <b>analisis Time Complexity (Big-O)</b>.
+      </p>
+
+      <div class="hero-actions">
+        <a href="{{ url_for('login') }}" class="btn primary">
+          Mulai Sekarang
+        </a>
+        <a href="#fitur" class="btn outline">
+          Lihat Konsep
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FEATURES ================= -->
+  <section id="fitur" class="features-final">
+
+    <header class="section-header">
+      <h2>Kenapa SIMA-ALG ⭐ Berbeda?</h2>
+      <p class="subtitle">
+        Tidak hanya sistem CRUD, tetapi juga media pembelajaran algoritma.
+      </p>
+    </header>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <h3>🔍 Search Algorithm</h3>
+        <p>
+          Implementasi <b>Linear Search</b>, <b>Sequential Search</b>,
+          dan <b>Binary Search</b> secara nyata pada data mahasiswa.
+        </p>
+        <small class="badge high">Efisiensi Tinggi</small>
+      </div>
+
+      <div class="feature-card">
+        <h3>⚙️ Sorting Algorithm</h3>
+        <p>
+          Proses pengurutan data menggunakan
+          <b>Bubble</b>, <b>Insertion</b>, <b>Selection</b>,
+          dan <b>Built-in Python Sort</b>.
+        </p>
+        <small class="badge medium">Data Processing</small>
+      </div>
+
+      <div class="feature-card">
+        <h3>📊 Time Complexity</h3>
+        <p>
+          Estimasi kompleksitas waktu <b>Big-O</b> ditampilkan
+          untuk mendukung pemahaman algoritma.
+        </p>
+        <small class="badge high">Akademik</small>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔐 Secure System</h3>
+        <p>
+          Sistem autentikasi aman menggunakan
+          <b>session</b> dan <b>password hashing</b>.
+        </p>
+        <small class="badge high">Security</small>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta-final">
+    <h2>Sistem Akademik Bukan Sekadar CRUD</h2>
+    <p>
+      SIMA-ALG ⭐ dirancang sebagai sistem manajemen data
+      sekaligus media pembelajaran algoritma dan struktur data.
+    </p>
+
+    <a href="{{ url_for('login') }}" class="btn primary">
+      Masuk ke Sistem
+    </a>
+  </section>
+
+  <!-- ================= BACKGROUND ACCENT ================= -->
+  <div class="home-accent" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+</div>
+
+{% endblock %}

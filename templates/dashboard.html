@@ -29,24 +29,78 @@
 
 </div>
 
-<!-- GRAFIK PIE (Realtime) -->
-<div class="chart-box">
-    <canvas id="jurusanChart"></canvas>
+<!-- ===== CHART AREA (PALING BAWAH) ===== -->
+<div class="dashboard-grid">
+    <div class="card wide">
+        <h3>Grafik Jumlah Mahasiswa per Jurusan</h3>
+
+        <div class="chart-wrapper">
+            <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="chart-wrapper">
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
 </div>
 
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script>
+    // data dari Flask
+const labelJurusan = JSON.parse('{{ per_jurusan | tojson | safe }}');
 
+    const labels = Object.keys(labelJurusan);
+    const values = Object.values(labelJurusan);
 
-new Chart(ctx, {
-    type: "pie",
-    data: {
-        labels: Object.keys(labelJurusan),
-        datasets: [{
-            data: Object.values(labelJurusan)
-        }]
-    }
-});
+    /* ===== PIE CHART ===== */
+    new Chart(document.getElementById("pieChart"), {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    "#6366f1",
+                    "#22c55e",
+                    "#f97316",
+                    "#ef4444",
+                    "#14b8a6",
+                    "#eab308",
+                    "#8b5cf6"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: "bottom" }
+            }
+        }
+    });
+
+    /* ===== BAR CHART ===== */
+    new Chart(document.getElementById("barChart"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Jumlah Mahasiswa",
+                data: values,
+                backgroundColor: "#6366f1"
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
 </script>
 
 {% endblock %}

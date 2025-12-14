@@ -1,27 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title if title else "Aplikasi Mahasiswa" }}</title>
+    <title>{{ title if title else "SIMA-ALG ⭐ | Sistem Informasi Mahasiswa berbasis Algoritma" }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MAIN STYLE -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body id="body">
 
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
     <div class="left">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('tambah') }}">Tambah</a>
-        <a href="{{ url_for('mahasiswa_page') }}">Data</a>
-        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('home') }}" class="brand">
+            <strong>SIMA-ALG ⭐</strong>
+        </a>
+
+        {% if session.get('user') %}
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('tambah') }}">Tambah Data</a>
+            <a href="{{ url_for('mahasiswa_page') }}">Data Mahasiswa</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        {% else %}
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
     </div>
 
     <div class="right">
         {% if session.get('user') %}
             <span class="user">👤 {{ session['user'] }}</span>
+
             <a href="{{ url_for('logout') }}" class="logout">Logout</a>
 
-            <!-- Toggle Mode -->
+            <!-- THEME TOGGLE -->
             <div class="theme-toggle">
                 <label class="switch">
                     <input id="theme-switch" type="checkbox">
@@ -33,31 +48,40 @@
     </div>
 </nav>
 
-<div class="container">
+<!-- ================= CONTENT ================= -->
+<main class="container">
     {% block content %}{% endblock %}
-</div>
+</main>
 
-<!-- MODE GELAP SCRIPT -->
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    © 2025 <strong>SIMA-ALG ⭐</strong> — Sistem Informasi Mahasiswa berbasis Algoritma
+</footer>
+
+<!-- ================= DARK MODE SCRIPT ================= -->
 <script>
-// LOAD tema sebelumnya
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-    document.getElementById("theme-switch").checked = true;
-    document.getElementById("theme-label").textContent = "🌙";
-}
+const themeSwitch = document.getElementById("theme-switch");
+const themeLabel = document.getElementById("theme-label");
 
-// EVENT toggle tema
-document.getElementById("theme-switch").addEventListener("change", function () {
-    if (this.checked) {
+if (themeSwitch) {
+    if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-        document.getElementById("theme-label").textContent = "🌙";
-    } else {
-        document.body.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-        document.getElementById("theme-label").textContent = "🌞";
+        themeSwitch.checked = true;
+        themeLabel.textContent = "🌙";
     }
-});
+
+    themeSwitch.addEventListener("change", function () {
+        if (this.checked) {
+            document.body.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+            themeLabel.textContent = "🌙";
+        } else {
+            document.body.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+            themeLabel.textContent = "🌞";
+        }
+    });
+}
 </script>
 
 </body>
