@@ -5,19 +5,16 @@
 
 <div class="dashboard-grid">
 
-    <!-- Total Mahasiswa -->
     <div class="card">
         <h3>Total Mahasiswa</h3>
         <p class="value">{{ total }}</p>
     </div>
 
-    <!-- Rata-rata IPK -->
     <div class="card">
         <h3>Rata-rata IPK</h3>
         <p class="value">{{ avg_ipk }}</p>
     </div>
 
-    <!-- Mahasiswa per Jurusan -->
     <div class="card wide">
         <h3>Jumlah Per Jurusan</h3>
         <ul class="jurusan-list">
@@ -29,16 +26,17 @@
 
 </div>
 
-<!-- ===== CHART AREA (PALING BAWAH) ===== -->
+<!-- ===== CHART AREA ===== -->
 <div class="dashboard-grid">
     <div class="card wide">
         <h3>Grafik Jumlah Mahasiswa per Jurusan</h3>
 
-        <div class="chart-wrapper">
-            <canvas id="pieChart"></canvas>
+        <!-- ukuran dikontrol inline biar aman -->
+        <div style="max-width:380px;margin:30px auto;">
+            <canvas id="donutChart"></canvas>
         </div>
 
-        <div class="chart-wrapper">
+        <div style="margin-top:40px;">
             <canvas id="barChart"></canvas>
         </div>
     </div>
@@ -48,19 +46,20 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // data dari Flask
-const labelJurusan = JSON.parse('{{ per_jurusan | tojson | safe }}');
+    const dataJurusan = JSON.parse('{{ per_jurusan | tojson | safe }}');
+    const labels = Object.keys(dataJurusan);
+    const values = Object.values(dataJurusan);
 
-    const labels = Object.keys(labelJurusan);
-    const values = Object.values(labelJurusan);
+    const total = values.reduce((a, b) => a + b, 0);
+    const percentValues = values.map(v => ((v / total) * 100).toFixed(1));
 
-    /* ===== PIE CHART ===== */
-    new Chart(document.getElementById("pieChart"), {
-        type: "pie",
+    /* ===== DONUT CHART + % DI TENGAH ===== */
+    new Chart(document.getElementById("donutChart"), {
+        type: "doughnut",
         data: {
             labels: labels,
             datasets: [{
-                data: values,
+                data: percentValues,
                 backgroundColor: [
                     "#6366f1",
                     "#22c55e",
@@ -69,25 +68,47 @@ const labelJurusan = JSON.parse('{{ per_jurusan | tojson | safe }}');
                     "#14b8a6",
                     "#eab308",
                     "#8b5cf6"
-                ]
+                ],
+                cutout: "65%" // 👈 lubang tengah (donut)
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: { position: "bottom" }
+                legend: { position: "bottom" },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.label}: ${ctx.raw}%`
+                    }
+                }
             }
-        }
+        },
+        plugins: [{
+            id: 'centerText',
+            afterDraw(chart) {
+                const { ctx } = chart;
+                const centerX = chart.getDatasetMeta(0).data[0].x;
+                const centerY = chart.getDatasetMeta(0).data[0].y;
+
+                ctx.save();
+                ctx.font = "bold 22px Poppins";
+                ctx.fillStyle = "#6366f1";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("100%", centerX, centerY);
+                ctx.restore();
+            }
+        }]
     });
 
-    /* ===== BAR CHART ===== */
+    /* ===== BAR CHART (PERSENTASE) ===== */
     new Chart(document.getElementById("barChart"), {
         type: "bar",
         data: {
             labels: labels,
             datasets: [{
-                label: "Jumlah Mahasiswa",
-                data: values,
+                label: "Persentase Mahasiswa (%)",
+                data: percentValues,
                 backgroundColor: "#6366f1"
             }]
         },
@@ -96,7 +117,17 @@ const labelJurusan = JSON.parse('{{ per_jurusan | tojson | safe }}');
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: { stepSize: 1 }
+                    max: 100,
+                    ticks: {
+                        callback: v => v + "%"
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ctx.raw + "%"
+                    }
                 }
             }
         }

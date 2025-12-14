@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* HILANGKAN HITAM KANAN */
+}
+
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
@@ -71,14 +79,12 @@ body.home .navbar {
 }
 
 .page-title {
-    font-size: 30px;
-    font-weight: 800;
-    margin-bottom: 26px;
     background: linear-gradient(135deg, #6366f1, #a855f7);
-    -webkit-background-clip: text;
+    background-clip: text;              /* STANDARD */
+    -webkit-background-clip: text;      /* SAFARI */
     color: transparent;
-    letter-spacing: 1px;
 }
+
 
 /* =========================================================
    DASHBOARD GRID
@@ -147,6 +153,15 @@ body.dark .value {
 /* Wide card */
 .card.wide {
     grid-column: span 2;
+}
+
+.footer {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 14px 10px;
+    font-size: 14px;
+    width: 100%;
 }
 
 /* =========================================================
@@ -374,10 +389,12 @@ body.dark table tbody tr:hover {
 
 .login-page {
     min-height: 100vh;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #667eea, #764ba2);
+    overflow: hidden;
 }
 
 .login-hero {
@@ -507,3 +524,319 @@ body.dark table tbody tr:hover {
         font-size: 13px;
     }
 }
+
+
+/* =========================================================
+   LOGIN PAGE — ISOLATED (AMAN)
+   HANYA AKTIF JIKA ADA .login-page
+========================================================= */
+
+/* Hilangkan container default hanya di login */
+body:has(.login-page) .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Area login full layar */
+.login-page {
+    min-height: calc(100vh - 70px); /* navbar tetap */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 40px 20px;
+}
+
+/* Wrapper text */
+.login-hero {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    color: white;
+}
+
+/* Judul */
+.login-hero h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.login-hero p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 28px;
+}
+
+/* Card */
+.login-card {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(16px);
+    border-radius: 22px;
+    padding: 36px 32px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.35);
+}
+
+/* Title card */
+.login-card h2 {
+    font-size: 24px;
+    margin-bottom: 18px;
+    color: white;
+}
+
+/* Input */
+.login-card input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+/* Button */
+.login-card button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Register text */
+.login-card .register-text {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #eee;
+}
+
+.login-card .register-text a {
+    color: #ffe066;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+    .login-page {
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+
+    .login-hero h1 {
+        font-size: 30px;
+    }
+
+    .login-hero p {
+        font-size: 14px;
+    }
+
+    .login-card {
+        padding: 28px 22px;
+    }
+}
+
+
+
+
+
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-right {
+    gap: 14px;
+}
+
+/* Button navbar */
+.btn-nav {
+    padding: 8px 18px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.15);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .25s ease;
+}
+
+.btn-nav:hover {
+    background: rgba(255,255,255,.25);
+    transform: translateY(-2px);
+}
+
+.btn-nav.outline {
+    border: 1px solid rgba(255,255,255,.6);
+    background: transparent;
+}
+
+.btn-nav.danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Username */
+.user {
+    font-weight: 600;
+    opacity: .9;
+}
+
+
+
+
+
+/* =========================================================
+   HOME PAGE — FULL BACKGROUND FIX
+   (HILANGKAN AREA PUTIH)
+========================================================= */
+
+body:has(.home-page) main.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+
+
+/* =========================================================
+   REGISTER PAGE — SAME AS LOGIN (SAFE)
+========================================================= */
+
+/* Deteksi halaman register */
+body:has(form[action*="register"]) {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Hilangkan container default */
+body:has(form[action*="register"]) main.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wrapper otomatis */
+body:has(form[action*="register"]) main.container > * {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Card register */
+body:has(form[action*="register"]) form {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(16px);
+    padding: 36px 34px;
+    border-radius: 22px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.25);
+}
+
+/* Judul */
+body:has(form[action*="register"]) h1,
+body:has(form[action*="register"]) h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Label */
+body:has(form[action*="register"]) label {
+    color: #f1f5f9;
+    font-weight: 500;
+}
+
+/* Input */
+body:has(form[action*="register"]) input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+/* Button */
+body:has(form[action*="register"]) button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+    color: #fff;
+}
+
+/* Link login */
+body:has(form[action*="register"]) a {
+    color: #ffe066;
+    font-weight: 600;
+}
+
+
+
+
+/* ================= REGISTER DIFFERENT STYLE ================= */
+
+.register-card {
+    border: 1px solid rgba(34,197,94,.45);
+}
+
+.register-card h2 {
+    color: #dcfce7;
+}
+
+.btn-register {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.btn-register:hover {
+    box-shadow: 0 12px 30px rgba(34,197,94,.45);
+}
+
+
+
+
+
+
+
+/* ================= LOGIN ================= */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.login-card {
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(16px);
+  padding: 36px;
+  border-radius: 22px;
+  width: 360px;
+  text-align: center;
+}
+
+.login-card button {
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+}
+
+
+

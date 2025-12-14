@@ -39,8 +39,9 @@
 }
 
 .hero-left h1 span {
-  background: linear-gradient(90deg, #a5b4fc, #22d3ee);
-  -webkit-background-clip: text;
+  background: linear-gradient(90deg, #818cf8, #22d3ee);
+  background-clip: text;              /* STANDARD */
+  -webkit-background-clip: text;      /* SAFARI / CHROME */
   color: transparent;
 }
 

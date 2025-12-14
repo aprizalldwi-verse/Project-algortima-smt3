@@ -1,18 +1,33 @@
 {% extends "base.html" %}
+
+{% block body_class %}register-body{% endblock %}
+
 {% block content %}
 
-<h2>Register</h2>
+<div class="login-page">
+  <div class="login-hero">
 
-<form method="POST" class="form-box">
-    <label>Username</label>
-    <input type="text" name="username" required>
+    <h1>📝 Buat Akun Baru</h1>
+    <p>Daftarkan akun untuk mulai menggunakan SIMA-ALG ⭐</p>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+    <div class="login-card register-card">
+      <h2>Register</h2>
 
-    <button type="submit">Buat Akun</button>
-</form>
+      <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
 
-<p>Sudah punya akun? <a href="{{ url_for('login') }}">Login</a></p>
+        <button type="submit" class="btn-register">Daftar Sekarang</button>
+      </form>
+
+      <p class="register-text">
+        Sudah punya akun?
+        <a href="{{ url_for('login') }}">Login di sini</a>
+      </p>
+
+    </div>
+  </div>
+</div>
 
 {% endblock %}

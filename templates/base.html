@@ -7,9 +7,12 @@
 
     <!-- MAIN STYLE -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
 </head>
 
-<body id="body">
+<body id="body" class="{% block body_class %}{% endblock %}">
+
 
 <!-- ================= NAVBAR ================= -->
 <nav class="navbar">
